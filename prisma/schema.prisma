@@ -35,6 +35,11 @@ model User {
   updatedAt DateTime @updatedAt
   connectedServers ConnectedServer[]
   scheduledPosts ScheduledPost[]
+
+  name String?
+  email String? @unique
+  password String?
+
 }
 
 model ConnectedServer{
