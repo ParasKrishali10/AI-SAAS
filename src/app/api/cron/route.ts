@@ -1,11 +1,9 @@
-// Cron job endpoint - processes scheduled posts
-// This should be called every minute by a service like Vercel Cron or GitHub Actions
 
 import { NextResponse } from 'next/server';
 import { processScheduledPosts } from '@/lib/scheduler';
 
 export async function GET(request: Request) {
-  // Security: Check for cron secret
+
   const authHeader = request.headers.get('authorization');
 
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
@@ -13,7 +11,7 @@ export async function GET(request: Request) {
   }
 
   try {
-    // Process all due posts
+
     const results = await processScheduledPosts();
 
     return NextResponse.json({
@@ -28,6 +26,5 @@ export async function GET(request: Request) {
   }
 }
 
-// For Vercel Cron, add this config
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
