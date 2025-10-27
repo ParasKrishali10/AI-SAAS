@@ -24,11 +24,11 @@ model Post {
 
 model User {
   id        String   @id @default(cuid())
-  discordId String @unique
-  discordUsername String
+  discordId String? @unique
+  discordUsername String?
   discordAvatar String?
-  accessToken String
-  refreshToken String
+  accessToken String?
+  refreshToken String?
 
   posts     Post[]
   createdAt DateTime @default(now())
